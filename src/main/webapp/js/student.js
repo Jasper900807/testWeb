@@ -1,8 +1,42 @@
 window.onload = function() {
 	let canvas, ctx;
 	//let WebSocket = new WebSocket("ws://10.0.101.65:8080/BradWeb/?");
-	//let WebSocket = new WebSocket("ws://10.0.101.85:8080/testWeb/?");
+	let webSocket = new WebSocket("ws://localhost:8080/testWeb/mycenter");
+	let isConnect = false;
 	
+	webSocket.onopen = function() {
+		console.log("onopen");
+		isConnect = true;
+	}
+	
+	webSocket.onmessage = function(e) {
+		console.log("onmessage" + e.data);
+		if(isConnect) {
+			let mesgObj = JSON.parse(e.data);
+			if (mesgObj.isClear) {
+				clear();
+			}
+			else {
+				if (mesgObj.isNewLine) {
+					newLine(mesgObj.x, mesgObj.y);
+				} 
+				else {
+					drawLine(mesgObj.x, mesgObj.y);
+				}
+			}
+		}
+	}
+	
+	webSocket.onclose = function() {
+		isConnect = false;
+	}
+	
+	webSocket.onerror = function(e) {
+		console.log("ERROR:" + e.data);
+	}
+	
+	
+	// -----
 	canvas = document.getElementById("myDrawer");
 	ctx = canvas.getContext("2d");
 	
@@ -18,7 +52,6 @@ window.onload = function() {
 	};
 	
 	function drawLine(x, y) {
-		let x = e.offsetX, y = e.offsetY;
 		ctx.lineTo(x, y);
 		ctx.stroke();
 	};
