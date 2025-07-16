@@ -27,4 +27,22 @@ public class Testutils {
 		
 		return new String(data);
 	}
+	
+	public static String calc(String sx, String sy, String op) {
+		try {
+			int x = Integer.parseInt(sx);
+			int y = Integer.parseInt(sy);
+			switch (op) {
+			case "1": return x + y + ""; 
+			case "2": return x - y + "";
+			case "3": return x * y + "";
+			case "4": return x / y + "..." + x % y;
+			default: return "";
+			}
+			
+						
+		} catch (Exception e) {
+			return "";
+		}
+	}
 }
