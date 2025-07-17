@@ -29,4 +29,8 @@ public class Member {
 		this.icon = icon;
 	}
 	
+	public String toString() {
+		return "toStr123";
+	}
+	
 }

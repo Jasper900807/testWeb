@@ -45,4 +45,9 @@ public class Testutils {
 			return "";
 		}
 	}
+	
+	public static String createScore() {
+		System.out.println("create");
+		return (int)(Math.random()*101) + "";
+	}
 }
