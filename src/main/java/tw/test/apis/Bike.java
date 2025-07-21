@@ -14,7 +14,8 @@ public class Bike implements Serializable {
 		speed = speed <1 ? 0 : speed*0.6;
 	}
 	
-	public double getSpeed() {
-		return speed;
+	public String toString() {
+		return speed + "";
 	}
+	
 }
