@@ -19,25 +19,19 @@
 	<c:when test="${BCrypt.checkpw(param.passwd, rs.rows[0].passwd)}">
 		<%
 			Result result = (Result)pageContext.getAttribute("rs");
-			SortedMap[] data = result.getRows();
-			SortedMap memberMap = data[0];
+			SortedMap memberMap = result.getRows()[0];
 		
-			Member member = new Member();
-			member.setId((long)memberMap.get("id"));
-			member.setAccount((String)memberMap.get("account"));
-			member.setName((String)memberMap.get("name"));
 			
 			try {
 				byte[] icon = (byte[])memberMap.get("icon");
 				String base64 = Base64.getEncoder().encodeToString(icon);
-				member.setIcon(base64);
+				memberMap.put("icon", base64);
 			}
 			catch (Exception e) {
-				member.setIcon("");
-			}
-			
-			session.setAttribute("member", member);				
+				memberMap.put("icon", "");
+			}				
 		%>
+		<c:set var="member" scope="session" value="${rs.rows[0] }"></c:set>
 		<c:redirect url="main.jsp"></c:redirect>
 	</c:when>
 	<c:otherwise>

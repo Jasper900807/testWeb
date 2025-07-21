@@ -4,7 +4,7 @@
 <% 
 	Object obj = session.getAttribute("x");
 	if (obj == null) {
-		//response.sendError(, "get out");
+		response.sendError(HttpServletResponse.SC_FORBIDDEN, "get out here");
 	}
 
 %>

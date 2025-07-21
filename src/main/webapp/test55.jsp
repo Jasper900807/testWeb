@@ -15,6 +15,8 @@
 	b1.upSpeed().upSpeed().upSpeed().upSpeed().upSpeed().upSpeed();
 	session.setAttribute("b1", b1);
 	
+	
+	session.setMaxInactiveInterval(10);
 %>
     
 <!DOCTYPE html>
